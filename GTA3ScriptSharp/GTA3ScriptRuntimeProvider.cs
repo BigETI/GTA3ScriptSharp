@@ -13,7 +13,7 @@ namespace GTA3ScriptSharp
         /// </summary>
         /// <param name="game">Game</param>
         /// <returns>GTA3Script runtime if successful, otherwise "null"</returns>
-        private static AGTA3ScriptRuntime CreateRuntime(EGame game)
+        public static AGTA3ScriptRuntime CreateRuntime(EGame game)
         {
             AGTA3ScriptRuntime ret = null;
             switch (game)

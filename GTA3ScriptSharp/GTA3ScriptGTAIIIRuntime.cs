@@ -8,6 +8,12 @@ namespace GTA3ScriptSharp
     /// </summary>
     public class GTA3ScriptGTAIIIRuntime : AGTA3ScriptRuntime
     {
-        // TODO
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public GTA3ScriptGTAIIIRuntime()
+        {
+            // TODO
+        }
     }
 }

@@ -11,116 +11,142 @@ namespace GTA3ScriptSharp
     public abstract class AGTA3ScriptRuntime
     {
         /// <summary>
-        /// GTA3Script operation codes
+        /// GTA3Script instruction set
         /// </summary>
-        private GTA3ScriptOpCode[] opCodes;
+        private GTA3ScriptInstruction[] instructionSet;
 
         /// <summary>
-        /// GTA3Script operation codes
+        /// Commands
         /// </summary>
-        private GTA3ScriptOpCode[] OpCodes
+        private GTA3ScriptCommand[] commands;
+
+        /// <summary>
+        /// Program counter
+        /// </summary>
+        public uint ProgramCounter { get; private set; }
+
+        /// <summary>
+        /// Is patchable
+        /// </summary>
+        public bool IsPatchable { get; private set; } = true;
+
+        /// <summary>
+        /// GTA3Script instruction set
+        /// </summary>
+        private GTA3ScriptInstruction[] InstructionSet
         {
             get
             {
-                if (opCodes != null)
+                if (instructionSet == null)
                 {
-                    // TODO
-                    opCodes = new GTA3ScriptOpCode[0];
+                    instructionSet = new GTA3ScriptInstruction[0];
                 }
-                return opCodes;
+                return instructionSet;
             }
         }
 
         /// <summary>
-        /// Patch operation code
+        /// GTA3Script commands
+        /// </summary>
+        private GTA3ScriptCommand[] Commands
+        {
+            get
+            {
+                if (commands == null)
+                {
+                    commands = new GTA3ScriptCommand[0];
+                }
+                return commands;
+            }
+        }
+
+        /// <summary>
+        /// Resize instruction set
+        /// </summary>
+        /// <param name="newSize">New size</param>
+        private void ResizeInstructionSet(uint newSize)
+        {
+            if (newSize != InstructionSet.Length)
+            {
+                GTA3ScriptInstruction[] instruction_set = new GTA3ScriptInstruction[newSize];
+                if (newSize > 0U)
+                {
+                    Array.Copy(InstructionSet, instruction_set, Math.Min(InstructionSet.Length, instruction_set.Length));
+                    instructionSet = instruction_set;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Patch instruction
         /// </summary>
         /// <param name="opCode">GTA3Script operation code</param>
-        /// <param name="onCall">GTA3Script operation code on call event</param>
-        /// <param name="argTypes">GTA3Script operation code argument types</param>
+        /// <param name="onCall">GTA3Script instruction on call event</param>
+        /// <param name="argumentTypes">GTA3Script instruction argument types</param>
         /// <exception cref="ArgumentException">Invalid argument</exception>
-        public void Patch(int opCode, GTA3ScriptOpCodeCallDelegate onCall, Type[] argTypes)
+        public void Patch(int opCode, GTA3ScriptOpCodeCallDelegate onCall, Type[] argumentTypes)
         {
-            if ((opCode >= 0) && (opCode < OpCodes.Length) && (onCall != null) && (argTypes != null))
+            if (IsPatchable && (opCode >= 0) && (onCall != null) && (argumentTypes != null))
             {
-                for (int i = 0; i < argTypes.Length; i++)
+                if (opCode > InstructionSet.Length)
                 {
-                    if (argTypes[i] == null)
+                    ResizeInstructionSet((uint)opCode + 1U);
+                }
+                for (int i = 0; i < argumentTypes.Length; i++)
+                {
+                    if (argumentTypes[i] == null)
                     {
                         throw new ArgumentException("argTypes[" + i + "] is null", "argTypes");
                     }
                 }
-                OpCodes[opCode] = new GTA3ScriptOpCode(onCall, argTypes);
+                InstructionSet[opCode] = new GTA3ScriptInstruction(onCall, argumentTypes);
             }
         }
 
         /// <summary>
-        /// Patch operation code
+        /// Execute step
         /// </summary>
-        /// <param name="opCode">GTA3Script operation code</param>
-        /// <param name="onCall">GTA3Script operation code on call event</param>
-        /// <param name="argTypes">GTA3Script operation code argument types</param>
-        public void Patch(EGTA3ScriptOpCode opCode, GTA3ScriptOpCodeCallDelegate onCall, Type[] argTypes)
+        /// <exception cref="GTA3ScriptExecutionException">GTA3Script execution exception</exception>
+        public bool ExecuteStep()
         {
-            Patch((int)opCode, onCall, argTypes);
-        }
-
-        /// <summary>
-        /// Invoke GTA3Script operation code
-        /// </summary>
-        /// <param name="opCode">GTA3Script operation code</param>
-        /// <param name="args">GTA3Script operation code arguments</param>
-        /// <exception cref="ArgumentException">Invalid argument</exception>
-        internal void Invoke(int opCode, object[] args)
-        {
-            object[] arguments = ((args == null) ? new object[0] : args);
-            if ((opCode >= 0) && (opCode < OpCodes.Length))
+            bool ret = false;
+            if (ProgramCounter < commands.Length)
             {
-                GTA3ScriptOpCode op_code = OpCodes[opCode];
-                if (op_code != null)
+                ref GTA3ScriptCommand command = ref commands[ProgramCounter];
+                try
                 {
-                    if (op_code.ArgTypes.Length == args.Length)
-                    {
-                        for (int i = 0; i < args.Length; i++)
-                        {
-                            object arg = args[i];
-                            if (arg != null)
-                            {
-                                if (arg.GetType() != op_code.ArgTypes[i])
-                                {
-                                    throw new ArgumentException("Invalid argument type " + arg.GetType().FullName + " for " + op_code.ArgTypes[i].FullName + " at index " + i + " operation code " + opCode, "args");
-                                }
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid null type for " + op_code.ArgTypes[i].FullName + " at index " + i + " operation code " + opCode, "args");
-                            }
-                        }
-                        op_code.Invoke(this, args);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Arguments length doesn't equal supported argument types", "args");
-                    }
+                    InstructionSet[command.OpCode].Invoke(this, command.Arguments);
+                    ++ProgramCounter;
+                    ret = true;
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new ArgumentException("Operation code " + opCode + " has not been implemented yet", "opCode");
+                    Console.Error.WriteLine(e);
+                    throw new GTA3ScriptExecutionException("Error executing operation code " + command.OpCode + " at command index " + ProgramCounter, e);
                 }
             }
-            else
-            {
-                throw new ArgumentException("Invalid operation code " + opCode, "opCode");
-            }
+            return ret;
         }
 
         /// <summary>
-        /// Invoke GTA3Script operation code
+        /// Execute
         /// </summary>
-        /// <param name="opCode">Operation code</param>
-        /// <exception cref="ArgumentException">Invalid argument</exception>
-        internal void Invoke(int opCode)
+        /// <exception cref="GTA3ScriptExecutionException">GTA3Script execution exception</exception>
+        public void Execute()
         {
-            Invoke(opCode, null);
+            while (ExecuteStep()) ;
+        }
+
+        /// <summary>
+        /// Load GTA3Script
+        /// </summary>
+        /// <param name="script">Script</param>
+        public void LoadScript(AGTA3Script script)
+        {
+            if (script != null)
+            {
+                script.LoadToRuntime(this);
+            }
         }
     }
 }

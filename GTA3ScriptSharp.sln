@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTA3ScriptSharp", "GTA3ScriptSharp\GTA3ScriptSharp.csproj", "{7F11278E-944D-4688-B3D6-08FB38D6E2F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTA3ScriptSharpTest", "GTA3ScriptSharpTest\GTA3ScriptSharpTest.csproj", "{96D9A01E-5DD4-4119-B023-73653473899D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7F11278E-944D-4688-B3D6-08FB38D6E2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F11278E-944D-4688-B3D6-08FB38D6E2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F11278E-944D-4688-B3D6-08FB38D6E2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D9A01E-5DD4-4119-B023-73653473899D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D9A01E-5DD4-4119-B023-73653473899D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D9A01E-5DD4-4119-B023-73653473899D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D9A01E-5DD4-4119-B023-73653473899D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

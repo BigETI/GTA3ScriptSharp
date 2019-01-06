@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 /// <summary>
 /// GTA3Script sharp namespace
@@ -6,16 +7,16 @@
 namespace GTA3ScriptSharp
 {
     /// <summary>
-    /// IR2 class
+    /// SC class
     /// </summary>
-    public class IR2 : AGTA3Script
+    public class SC : AGTA3Script
     {
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="game">Game</param>
         /// <param name="stream">Stream</param>
-        internal IR2(EGame game, Stream stream) : base(game, stream)
+        internal SC(EGame game, Stream stream) : base(game, stream)
         {
             // ...
         }
@@ -26,18 +27,18 @@ namespace GTA3ScriptSharp
         /// <param name="game">Game</param>
         /// <param name="stream">Stream</param>
         /// <param name="disposeStreamOnDispose">Dispose stream on dispose</param>
-        internal IR2(EGame game, Stream stream, bool disposeStreamOnDispose) : base(game, stream, disposeStreamOnDispose)
+        internal SC(EGame game, Stream stream, bool disposeStreamOnDispose) : base(game, stream, disposeStreamOnDispose)
         {
             // ...
         }
 
         /// <summary>
-        /// Load GTA3Script to GTA3Script runtime
+        /// Load GTA3Script runtime to GTA3Script runtime
         /// </summary>
-        /// <param name="runtime">GTA3Script runtime</param>
+        /// <param name="runtime"></param>
         internal override void LoadToRuntime(AGTA3ScriptRuntime runtime)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

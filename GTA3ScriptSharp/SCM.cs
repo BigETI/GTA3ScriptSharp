@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 
 /// <summary>
 /// GTA3Script sharp namespace
@@ -10,69 +9,36 @@ namespace GTA3ScriptSharp
     /// <summary>
     /// SCM class
     /// </summary>
-    public class SCM : IDisposable
+    public class SCM : AGTA3Script
     {
         /// <summary>
-        /// Game
+        /// Constructor
         /// </summary>
-        private EGame game;
-
-        /// <summary>
-        /// Stream
-        /// </summary>
-        private Stream stream;
+        /// <param name="game">Game</param>
+        /// <param name="stream">Stream</param>
+        internal SCM(EGame game, Stream stream) : base(game, stream)
+        {
+            // ...
+        }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="game">Game</param>
         /// <param name="stream">Stream</param>
-        internal SCM(EGame game, Stream stream)
+        /// <param name="disposeStreamOnDispose">Dispose stream on dispose</param>
+        internal SCM(EGame game, Stream stream, bool disposeStreamOnDispose) : base(game, stream, disposeStreamOnDispose)
         {
-            this.game = game;
-            this.stream = stream;
+            // ...
         }
 
         /// <summary>
-        /// Interpret script
+        /// Load GTA3Script to GTA3Script runtime
         /// </summary>
-        /// <returns></returns>
-        public static AGTA3ScriptRuntime Interpret()
+        /// <param name="runtime">GTA3Script runtime</param>
+        internal override void LoadToRuntime(AGTA3ScriptRuntime runtime)
         {
-            // TODO
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Compile script to assembly
-        /// </summary>
-        /// <returns>Assembly if successful, otherwise "null"</returns>
-        public static Assembly CompileToAssembly()
-        {
-            // TODO
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Compile to IR2
-        /// </summary>
-        /// <returns>IR2 if successful, otherwise "null"</returns>
-        public static IR2 CompileToIR2()
-        {
-            // TODO
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Dispose
-        /// </summary>
-        public void Dispose()
-        {
-            if (stream != null)
-            {
-                stream.Dispose();
-                stream = null;
-            }
         }
     }
 }

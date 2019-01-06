@@ -14,25 +14,56 @@ namespace GTA3ScriptSharp
     public static class GTA3Script
     {
         /// <summary>
-        /// Open SCM directory
+        /// Open script directory
         /// </summary>
-        /// <param name="directory">SCM directory</param>
+        /// <param name="directory">Script directory</param>
         /// <param name="game">Game</param>
-        /// <param name="filesMode">SCM files mode</param>
-        /// <returns>SCM files if successful, otherwise "null"</returns>
-        public static SCMFiles OpenSCMDirectory(string directory, EGame game, EGTA3ScriptFilesMode filesMode)
+        /// <param name="filesMode">Script files mode</param>
+        /// <returns>Script files if successful, otherwise "null"</returns>
+        public static GTA3ScriptFiles OpenScriptDirectory(string directory, EGame game, EGTA3ScriptFilesMode filesMode)
         {
-            SCMFiles ret = null;
+            GTA3ScriptFiles ret = null;
             if (Directory.Exists(directory))
             {
                 string main_scm_path = Path.Combine(directory, "main.scm");
                 string script_img_path = Path.Combine(directory, "script.img");
                 if (File.Exists(main_scm_path) && File.Exists(script_img_path))
                 {
-                    using (IMGArchive img_file = IMGFile.OpenRead(script_img_path))
+                    List<Stream> streams = new List<Stream>();
+                    try
                     {
-                        // TODO
+                        streams.Add(File.Open(main_scm_path, FileMode.Open, FileAccess.Read));
+                        using (IMGArchive img_archive = IMGFile.OpenRead(script_img_path))
+                        {
+                            IMGArchiveEntry[] entries = img_archive.Entries;
+                            foreach (IMGArchiveEntry entry in entries)
+                            {
+                                if (entry != null)
+                                {
+                                    Stream stream = entry.Open();
+                                    if (stream != null)
+                                    {
+                                        streams.Add(stream);
+                                    }
+                                }
+                            }
+                        }
+                        AGTA3Script[] scripts = new AGTA3Script[streams.Count];
+                        for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i] = new SCM(game, streams[i]);
+                        }
+                        ret = new GTA3ScriptFiles(game, scripts);
                     }
+                    catch (Exception e)
+                    {
+                        Console.Error.WriteLine(e);
+                        foreach (Stream stream in streams)
+                        {
+                            stream.Dispose();
+                        }
+                    }
+                    streams.Clear();
                 }
             }
             return ret;
@@ -51,32 +82,7 @@ namespace GTA3ScriptSharp
             {
                 if (File.Exists(path))
                 {
-                    List<string> lines = new List<string>();
-                    try
-                    {
-                        using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read))
-                        {
-                            using (StreamReader reader = new StreamReader(stream))
-                            {
-                                string line;
-                                while ((line = reader.ReadLine()) != null)
-                                {
-                                    // TODO
-                                    // Validate
-
-                                    lines.Add(line);
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.Error.WriteLine(e);
-                    }
-
-                    // Instantiate
-                    ret = new IR2(game, lines.ToArray());
-                    lines.Clear();
+                    ret = new IR2(game, File.Open(path, FileMode.Open, FileAccess.Read));
                 }
             }
             return ret;
