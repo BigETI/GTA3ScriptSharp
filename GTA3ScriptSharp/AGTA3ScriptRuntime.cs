@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// GTA3Script sharp namespace
@@ -16,14 +17,24 @@ namespace GTA3ScriptSharp
         private GTA3ScriptInstruction[] instructionSet;
 
         /// <summary>
-        /// Commands
+        /// Thread name
         /// </summary>
-        private GTA3ScriptCommand[] commands;
+        private string threadName;
+
+        /// <summary>
+        /// Main script
+        /// </summary>
+        private GTA3ScriptCommand[] mainScript;
 
         /// <summary>
         /// Program counter
         /// </summary>
-        public uint ProgramCounter { get; private set; }
+        public uint ProgramCounter { get; internal set; }
+
+        /// <summary>
+        /// Register
+        /// </summary>
+        public int Register { get; internal set; }
 
         /// <summary>
         /// Is patchable
@@ -31,9 +42,14 @@ namespace GTA3ScriptSharp
         public bool IsPatchable { get; private set; } = true;
 
         /// <summary>
+        /// Keywords
+        /// </summary>
+        private Dictionary<string, ushort> keywords = new Dictionary<string, ushort>();
+
+        /// <summary>
         /// GTA3Script instruction set
         /// </summary>
-        private GTA3ScriptInstruction[] InstructionSet
+        internal GTA3ScriptInstruction[] InstructionSet
         {
             get
             {
@@ -52,11 +68,11 @@ namespace GTA3ScriptSharp
         {
             get
             {
-                if (commands == null)
+                if (mainScript == null)
                 {
-                    commands = new GTA3ScriptCommand[0];
+                    mainScript = new GTA3ScriptCommand[0];
                 }
-                return commands;
+                return mainScript;
             }
         }
 
@@ -64,7 +80,7 @@ namespace GTA3ScriptSharp
         /// Resize instruction set
         /// </summary>
         /// <param name="newSize">New size</param>
-        private void ResizeInstructionSet(uint newSize)
+        private void ResizeInstructionSet(ushort newSize)
         {
             if (newSize != InstructionSet.Length)
             {
@@ -83,23 +99,36 @@ namespace GTA3ScriptSharp
         /// <param name="opCode">GTA3Script operation code</param>
         /// <param name="onCall">GTA3Script instruction on call event</param>
         /// <param name="argumentTypes">GTA3Script instruction argument types</param>
+        /// <param name="names">Name</param>
         /// <exception cref="ArgumentException">Invalid argument</exception>
-        public void Patch(int opCode, GTA3ScriptOpCodeCallDelegate onCall, Type[] argumentTypes)
+        public void Patch(ushort opCode, GTA3ScriptOpCodeCallDelegate onCall, Type[] argumentTypes, params string[] names)
         {
-            if (IsPatchable && (opCode >= 0) && (onCall != null) && (argumentTypes != null))
+            Type[] argument_types = ((argumentTypes == null) ? (new Type[0]) : argumentTypes);
+            string[] n = ((names == null) ? (new string[0]) : names);
+            if (IsPatchable && (opCode >= 0) && (onCall != null))
             {
                 if (opCode > InstructionSet.Length)
                 {
-                    ResizeInstructionSet((uint)opCode + 1U);
+                    ResizeInstructionSet((ushort)(opCode + 1));
                 }
-                for (int i = 0; i < argumentTypes.Length; i++)
+                for (int i = 0; i < argument_types.Length; i++)
                 {
-                    if (argumentTypes[i] == null)
+                    if (argument_types[i] == null)
                     {
                         throw new ArgumentException("argTypes[" + i + "] is null", "argTypes");
                     }
                 }
-                InstructionSet[opCode] = new GTA3ScriptInstruction(onCall, argumentTypes);
+                InstructionSet[opCode] = new GTA3ScriptInstruction(onCall, argument_types);
+                foreach (string name in n)
+                {
+                    if (name != null)
+                    {
+                        if (!(keywords.ContainsKey(name)))
+                        {
+                            keywords.Add(name, opCode);
+                        }
+                    }
+                }
             }
         }
 
@@ -110,9 +139,9 @@ namespace GTA3ScriptSharp
         public bool ExecuteStep()
         {
             bool ret = false;
-            if (ProgramCounter < commands.Length)
+            if (ProgramCounter < mainScript.Length)
             {
-                ref GTA3ScriptCommand command = ref commands[ProgramCounter];
+                ref GTA3ScriptCommand command = ref mainScript[ProgramCounter];
                 try
                 {
                     InstructionSet[command.OpCode].Invoke(this, command.Arguments);

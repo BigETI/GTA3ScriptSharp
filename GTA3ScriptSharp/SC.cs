@@ -33,9 +33,9 @@ namespace GTA3ScriptSharp
         }
 
         /// <summary>
-        /// Load GTA3Script runtime to GTA3Script runtime
+        /// Load GTA3Script to GTA3Script runtime
         /// </summary>
-        /// <param name="runtime"></param>
+        /// <param name="runtime">GTA3Script Runtime</param>
         internal override void LoadToRuntime(AGTA3ScriptRuntime runtime)
         {
             throw new NotImplementedException();

@@ -1,0 +1,784 @@
+0000: NOP
+0001: wait 0 ms
+0002: jump @MAIN_14396
+0003: shake_camera 300
+0004: $DEFAULT_WAIT_TIME = 250 // integer values
+0005: $2 = 0.0625 // floating-point values
+0006: 16@ = 0 // integer values
+0007: 7@ = 0.0
+0008: $754 += 1 // integer values
+0009: $1123 += 1.75 // floating-point values
+000A: 14@ += 1  // integer values
+000B: 12@ += 3.0  // floating-point values
+000C: $1122 -= 3 // integer values
+000D: $430 -= 10.0 // floating-point values
+000E: 0@ -= 1  // integer values
+000F: 9@ -= 3.0  // floating-point values
+0010: $JUMP_BONUS *= 180 // integer values
+0011: $LAND_Z *= 100.0 // floating-point values
+0012: 22@ *= 100
+0013: 17@ *= -1.0  // floating-point values
+0014: $JUMP_BONUS /= 3 // integer values
+0015: $3 /= 2.0 // floating-point values
+0016: 4@ /= 2
+0017: 14@ /= 1000.0
+0018:   $65 > 17 // integer values
+0019:   16@ > 1440000 // integer values
+001A:   19 > $65 // integer values
+001B:   6000 > 16@ // integer values
+001C:   $DODO_FLIGHTTIME > $DODO_FLIGHTTIME_RECORD // integer values
+001D:   27@ > 33@  // (int)
+001F:   17@ > $1480 // integer values
+0020:   $430 > -9.9999 // floating-point values
+0022:   10.0 > $430 // floating-point values
+0024:   $CURRENT_Z > $HEIGHEST_Z // floating-point values only
+0025:   3@ > 6@  // (float)
+0026:   $TEMPVAR_FLOAT_1 > 513@  // (float)
+0028:   $65 >= 9 // integer values
+0029:   17@ >= 20000 // integer values
+002A:   5 >= $65 // integer values
+002B:   5000 >= 16@  // integer values
+002C:   $VAR >= $VAR2  // (int)
+002D:   43@ >= 271@  // (int)
+002E:   $INTEGER_GLOBAL >= 131@  // (int)
+0031:   42@ >= 0.05  // floating-point values
+0033:   -0.05 >= 42@  // floating-point values
+0034:   $8276 >= $8278  // (float)
+0035:   98@ >= 50@  // (float)
+0036:   $FLOAT_1 >= 181@  // (float)
+0037:   189@ >= $FLOAT_2  // (float)
+0038:   $ONMISSION == 0 // integer values
+0039:   1@ == 1 // integer values
+003A:   $1290 == $PARAMEDIC_PEOPLE_TO_SAVE_THIS_LEVEL // integer values and handles
+003B:   18@ == 21@  // (int)
+003C:   $TEMP_INT == 6@  // (int)
+0042:   $1090 == 1016.0 // floating-point values
+0044:   $3499 == $3507  // (float)
+0045:   85@ == 69@  // (float)
+0046:   $var == 0@  // (float)
+004C: jump_if_true @mythread
+004D: jump_if_false @MAIN_14291
+004E: end_thread
+004F: create_thread @NONAME_4
+0050: gosub @C_CARP_1474
+0051: return
+0053: $PLAYER_CHAR = create_player #NULL at 811.875 -939.9374 35.75
+0054: store_player $PLAYER_CHAR position_to $1347 $1348 $1349
+0055: put_player $PLAYER_CHAR at 888.5625 -308.3749 -99.9999
+0056:   player $PLAYER_CHAR 0 -229.9999 255.0 -209.9999 275.0
+0057:   player $PLAYER_CHAR sphere 0 in_cube_cornerA 1066.5625 -403.4999 14.0 cornerB 1072.75 -393.9999 18.0
+0058: $JUMP_BONUS += $JUMP_ROTATION // integer values
+0059: $773 += $774 // floating-point values
+005A: 3@ += 1@  // (int)
+005B: 4@ += 17@  // (float)
+005C: 17@ += $1029 // (int)
+005D: 20@ += $TEMPVAR_FLOAT_1  // (float)
+005E: $1923 += 25@  // (int)
+005F: $TEMPVAR_FLOAT_3 += 18@  // (float)
+0060: $DODO_FLIGHTTIME -= $DODO_TAKEOFFTIME // integer values
+0061: $773 -= $772 // floating-point values
+0062: 13@ -= 11@  // (int)
+0063: 18@ -= 6@  // (float)
+0064: 3@ -= $TEMP_INT  // (int)
+0065: 20@ -= $FLOAT_1  // (float)
+0066: $6681 -= 171@  // (int)
+0068: $JUMP_BONUS *= $JUMP_MULTIPLY // integer values
+0069: $766 *= $766 // floating-point values
+006A: 3@ *= 5@  // (int)
+006B: 8@ *= 9@  // (float)
+0070: $1293 /= $PARAMEDIC_PEOPLE_TO_SAVE_THIS_LEVEL // integer values
+0071: $1363 /= $1365 // floating-point values
+0079: $var+= frame_delta_time * 6.325 // (float)
+0079: 0@ += frame_delta_time * -1.325 // (float)
+007A: $float += frame_delta_time * $float2 // (float)
+007B: 0@ += frame_delta_time * 1@ // (float)
+007C: 3@ += frame_delta_time * $var // (float)
+007D: $TEMPVAR_FLOAT_1 += frame_delta_time * 2@ // (float)
+007E: $float -= frame_delta_time * 0.01 // floating-point values
+007F: 1@ -= frame_delta_time * 1.0 // (float)
+0080: $float -= frame_delta_time * $float2 // (float)
+0081: 0@ -= frame_delta_time * 0@ // (float)
+0082: 9@ -= frame_delta_time * $float // (float)
+0083: $18 -= frame_delta_time * 3@ // (float)
+0084: $JUMP_BONUS = $JUMP_FLIPS // integer values and handles
+0085: 1@ = 0@ // (int)
+0086: $3 = $2 // floating-point values only
+0087: 1@ = 0@ // (float)
+0088: $float = 0@ // floating-point values only
+0089: 9@ = $float // floating-point values only
+008A: $int = 0@ // (int)
+008B: 1@ = $INT // (int)
+008C: $JUMP_ROTATION = float_to_integer $775
+008D: $LAND_Z = integer_to_float $JUMP_DIST
+008E: 0@ = float $var to_integer
+008F: 1@ = integer $int to_float
+0090: $int = float 12@ to_integer
+0091: $float = integer 4@ to_float
+0092: 0@ = float 0@ to_integer
+0093: 1@ = integer 2@ to_float
+0094: make $var absolute_integer
+0095: make 9@ absolute_integer
+0096: make $float absolute_float
+0097: make 0@ absolute_float
+0098: 0@ = random_float_in_ranges_0.0_to_1.0
+0099: $3260 = random_integer_0-to-65535
+009A: $CHAR_GUNSHOPOWNER = create_actor_pedtype 21 model #SPECIAL04 at 1070.75 -396.9374 14.1875
+009B: destroy_actor_instantly $CHAR_GUNSHOPOWNER
+009C: set_actor $FACTORY_TRIAD1 wander_direction 0
+009F: set_actor $WASTED_HELP_MEDIC idle
+00A0: store_actor $PATIENT1 position_to $1355 $1356 $1357
+00A1: put_actor $1484 at 1204.1875 -801.8749 13.6875
+00A2:   actor $RAY1_WITNESS alive
+00A3:   actor $CURLY_BOB 0 1538.0 -740.9999 1304.0 -900.9999
+00A4:   actor $SALVATORE 0 1428.75 -186.9999 50.0 1442.5 -179.8749 53.0
+00A5: $CAR_PORTLAND_IMPORT = create_car $VAR_PORTLAND_IMPORT_TYPE at 1504.0625 -680.0624 12.0625
+00A6: destroy_car $CAR_PORTLAND_IMPORT
+00A7: car $WASTED_HELP_AMBULANCE drive_to 1023.0 -479.9999 19.6875
+00A8: set_car $WASTED_HELP_AMBULANCE to_psycho_driver
+00A9: set_car $BUSTED_HELP_ENFORCER to_normal_driver
+00AA: store_car $735 position_to $CURRENT_X $CURRENT_Y $CURRENT_Z
+00AB: put_car $VIGILANTE_CRIMINALS_CAR at $1436 $1437 $1438
+00AC:   car $FRANK1_PARTY_CAR1 on_land
+00AD: set_car $WASTED_HELP_AMBULANCE max_speed_to 40.0
+00AE: unknown_set_car $WASTED_HELP_AMBULANCE to_ignore_traffic_lights 2
+00AF: set_car $LUIGI4_PIMP_CAR driver_behaviour_to 11
+00B0:   car $CAR_PORTLAND_IMPORT 0 1496.75 -686.1874 1523.25 -666.7499
+00B1:   car $CAR_WITH_CORPSE 0 1135.75 55.5 -0.9999 1149.75 46.25 30.0
+00BA: show_text_styled GXT "GXT" time 1000 style 2  // Text
+00BB: show_text_lowpriority GXT 'GXT' time 3000 flag 1  // Text
+00BC: show_text_highpriority GXT 'GXT' time 1000 flag 1  // Text
+00BD: show_text_mediumpriority GXT 'GXT' time 4000 flag 1
+00BE: text_clear_all
+00BF: $65 = current_time_hours, $66 = current_time_minutes
+00C0: set_current_time 12 0
+00C1: $ASUKA1_MINS_TO_SALVATORE_LEAVES = minutes_to_current_time $ASUKA1_SALVATORE_LEAVING_TIME_HOURS $ASUKA1_SALVATORE_LEAVING_TIME_MINS
+00C2:   sphere_onscreen 1@ 2@ 3@ radius 5.0
+00C3: enter_debugmode
+00C4: exit_debugmode
+00C5: true
+00C6: return_false
+00D6: if
+00D7: create_thread @HJ // without extra params
+00D8: mission_cleanup
+00D9: $VIGILANTE_CRIMINALS_CAR = actor $CRIMINAL_FOR_VIGILANTE car // add to mission cleanup
+00DA: $PLAYER_CAR = player $PLAYER_CHAR car
+00DB:   actor $WASTED_HELP_MEDIC in_car $WASTED_HELP_AMBULANCE
+00DC:   player $PLAYER_CHAR driving $1483
+00DD:   actor $hActor driving_vehicle_type #AMBULAN
+00DE:   player $PLAYER_CHAR driving_vehicle_type #TOYZ
+00DF:   actor $PATIENT1 driving
+00E0:   player $PLAYER_CHAR driving
+00E1:   player 0 pressed_button 19
+00E2: get_player 0 key 15 state_to 4@
+00E3:   player $PLAYER_CHAR 0 1140.25 50.0625 radius 20.0 20.0
+00E4:   player $PLAYER_CHAR 0 811.875 -939.9374 radius 3.5 3.5
+00E5:   player $PLAYER_CHAR 0 940.375 -933.6874 radius 4.0 4.0
+00E6:   player $PLAYER_CHAR stopped $10 1529.0 -823.9999 radius 3.0 4.0
+00E7:   player $PLAYER_CHAR stopped 0 1440.625 -181.3749 radius 1.0 1.0
+00E8:   player $PLAYER_CHAR stopped 0 906.0 -424.9999 radius 4.0 4.0
+00E9:   player $PLAYER_CHAR 0 $CRIMINAL_FOR_VIGILANTE radius 150.0 150.0
+00EA:   player $PLAYER_CHAR 0 $3276 radius 40.0 40.0
+00EB:   player $PLAYER_CHAR 0 $MISTY_CHAR radius 20.0 20.0
+00EC:   actor $PATIENT1 0 $PARAMEDIC_CREATE_PATIENT_X $PARAMEDIC_CREATE_PATIENT_Y radius 25.0 25.0
+00ED:   actor $1484 sphere 0 1204.1875 -801.8749 radius 0.5 0.5
+00EE:   actor $SALVATORE 0 1371.0 -283.8749 radius 50.0 50.0
+00EF:   actor $FRANK3_8BALL sphere 1 1529.0 -823.9999 radius 3.0 4.0
+00F0:   actor $MARIA stopped 0 1440.5 -179.1249 radius 1.0 1.0
+00F1:   actor $PLAYER_ACTOR sphere 0 near_point 340.0 200.0 stopped_in_car
+00F2:   actor $Actor1 near_actor $Actor2 radius 30.0 30.0 sphere 0
+00F3:   actor $Actor1 near_actor_on_foot $Actor2 radius 3.0 3.0 sphere 0
+00F4:   actor 1@ near_actor $PLAYER_ACTOR radius 6.0 6.0 sphere 0 in_car
+00F5:   player $PLAYER_CHAR 0 1014.0 -119.9999 5.0 radius 5.0 5.0 5.0
+00F6:   player $PLAYER_CHAR 0 1224.5625 -840.2499 15.0 radius 1.0 1.0 2.0
+00F7:   player $PLAYER_CHAR sphere 0 near_point_in_car 793.125 -929.9374 42.125 radius 4.0 2.0 3.0
+00F9:   player $PLAYER_CHAR stopped 0 1224.5625 -840.2499 15.0 radius 1.0 1.0 2.0
+00FA:   player $PLAYER_CHAR stopped 1 $PARAMEDIC_CHECKPOINT_X $PARAMEDIC_CHECKPOINT_Y $PARAMEDIC_CHECKPOINT_Z radius 6.0 6.0 2.0
+00FB:   player $PLAYER_CHAR 0 $LUIGI2_DEALER radius 10.0 10.0 10.0
+00FC:   player $PLAYER_CHAR 0 $LUIGI5_PROSTITUTE1 on_foot radius 8.0 8.0 2.0
+00FD:   player $PLAYER_CHAR 0 $PATIENT1 in_car radius 10.0 10.0 2.0
+00FE:   actor $FRANK3_CARTEL4 0 1517.5 -940.5624 18.375 radius 0.5 0.5 2.0
+00FF:   actor $1498 0 1209.375 -807.1874 14.0 radius 4.0 4.0 4.0
+0100:   actor $actor near_point_in_car 1@ 2@ 3@ radius 5.0 5.0 5.0 sphere 0
+0102:   actor $actor stopped_near_point_on_foot 0@ 1@ 2@ radius 1.0 1.0 2.0 sphere 0
+0103:   actor $PLAYER_ACTOR in_sphere -1577.942 52.6333 16.3281 radius 4.0 4.0 6.0 sphere 0 stopped_in_car
+0104:   actor $PLAYER_ACTOR near_actor 1@ radius 15.0 15.0 15.0 sphere 0
+0105:   actor $PLAYER_ACTOR near_actor 2@ radius 5.0 5.0 2.0 sphere 0 on_foot
+0106:   actor $PLAYER_ACTOR near_actor 1@ radius 15.0 15.0 15.0 sphere 0 in_car
+0107: $JOEY2_NOODLE_STAND = create_object #NOODLESBOX at 975.0 -719.9999 14.0
+0108: destroy_object $1118
+0109: player $PLAYER_CHAR money += $JUMP_BONUS
+010A:   player $PLAYER_CHAR money > 499999
+010B: $money = player $player_char money
+010C: change_player_into_rc_buggy $PLAYER_CHAR at $1162 $1163 $1164 180.0
+010D: set_player $PLAYER_CHAR wanted_level_to $1149
+010E: set_player $PLAYER_CHAR minimum_wanted_level_to 1
+010F:   player $PLAYER_CHAR wanted_level > 0
+0110: clear_player $PLAYER_CHAR wanted_level
+0111: set_wasted_busted_check_to 1
+0112:   wasted_or_busted
+0113: set_player $PLAYER_CHAR car_weapon 6 ammo_to 10
+0114: set_actor $actor weapon 11 add_ammo 1000
+0117:   player $PLAYER_CHAR wasted
+0118:   actor $CHAR_GUNSHOPOWNER dead
+0119:   car $735 wrecked
+011A: set_actor $FACTORY_TRIAD1 search_threat 1
+011C: actor $PLAYER_ACTOR clear_objective
+011D: unknown 0
+0121:  player $PLAYER_CHAR in_zone 'ZONE'
+0123:   actor $ASUKA1_MAFIA9 spotted_player $PLAYER_CHAR
+0126:   actor $JOEY4_TRIAD1 walking
+0129: $BUSTED_HELP_COP_1 = create_actor 4 #COP in_car $BUSTED_HELP_POLICECAR_1 driverseat
+012A: put_player $PLAYER_CHAR at 1454.5625 -189.4999 55.0 and_remove_from_car
+0130:   player $PLAYER_CHAR busted
+0135: set_car $1497 door_lock 2
+0137:   car $735 id == #DODO
+0149:   car $1483 crushed_by_car_crusher
+014B: $JOEY_BFINJECTION = init_car_generator #BFINJECT color -1 -1 force_spawn 0 alarm 100 door_lock 0 min_delay 0 max_delay 10000 at 930.875 -267.6249 -99.9999 angle 340.0
+014C: set_parked_car_generator $JOEY_BFINJECTION cars_to_generate_to 0
+014D: text_pager 'DIAB1_A' 140 2 0
+014E: start_timer_at $COUNTDOWN_TIME1
+014F: stop_timer $COUNTDOWN_TIME1
+0151: remove_status_text $RC_BUGGY_KILLS
+0157: camera_on_player $PLAYER_CHAR mode 15 transition 2
+0158: camera_on_vehicle $USJ_CAR 15 switchstyle 2
+0159: camera_on_ped $8BALL_CHAR 15 switchstyle 2
+015A: restore_camera
+015C: set_zone_gang_info 'CITYZON' 1 12 0 0 0 0 0 0 0 20
+015D: set_gamespeed 0.25
+015F: set_camera_position 884.5 -305.3124 13.5 rotation 0.0 0.0 0.0
+0160: point_camera 885.25 -305.8124 13.0 switchstyle 2
+0161: tie_marker $DIABLO1_CHEETAH1_MARKER to_car $DIABLO1_CHEETAH1 color 0 visibility 1
+0162: tie_marker $KENJI5_YARDIE1_MARKER to_actor $KENJI5_YARDIE1 1 3
+0164: disable_marker $LUIGI_MISSION_MARKER
+0165: set_marker $3881 color_to 4
+0166: set_marker $2341 brightness_to 1
+0167: $2341 = create_marker_at $DIABLO1_NEXT_CHECKPOINT_X $DIABLO1_NEXT_CHECKPOINT_Y $DIABLO1_NEXT_CHECKPOINT_Z color 5 flag 2
+0168: show_on_radar $2341 2
+0169: set_fade_color 0 0 0
+016A: fade 0 0 ms
+016B:   fading
+016C: restart_if_wasted at 1144.25 -596.8749 13.875 90.0
+016D: restart_if_busted at 1143.875 -675.1874 -99.9999 90.0
+016E: override_next_restart at 811.875 -939.9374 35.75 angle 180.0
+016F: create_particle 3 0.0 1.0 0 255 0 0 at 1270.8125 -1107.6874 11.0625
+0171: set_player $PLAYER_CHAR z_angle_to 180.0
+0172: $2068 = actor $MARIA z_angle
+0173: set_actor $CHAR_GUNSHOPOWNER z_angle_to 170.0
+0174: $772 = car $735 z_angle
+0175: set_car $CAR_PORTLAND_IMPORT z_angle_to 90.0
+0176: $430 = object $13 z_angle
+0177: set_object $MISTY_DOOR2 z_angle_to 180.0
+0178:   player $PLAYER_CHAR picked_up_object $4102
+017A: set_player $PLAYER_CHAR weapon 7 ammo_to 0
+017B: set_actor $actor weapon 9 ammo_to 1
+0180: set_on_mission_flag_to $ONMISSION
+0181: on_mission_for 12 flag = $ON_MISSION_FOR_8BALL
+0182: contact 12 base_brief = 1000
+0185:   car $TAXI_MISSION_CAR health >= 500
+0186: $FIRE_MISSION_MARKER = create_marker_above_car $FIRE_MISSION_CAR
+0187: $1307 = create_marker_above_actor $PATIENT1
+0188: $2624 = create_marker_above_object $ASUKA4_FAKETARGET1
+0189: $66 = unknown_create_checkpoint_at 240.4 -1280.2 10.0
+018A: $OFFROAD_CHECKPOINT_1 = create_checkpoint_at $OFFROAD_CHECKPOINT_1_X $OFFROAD_CHECKPOINT_1_Y $OFFROAD_CHECKPOINT_1_Z
+018B: show_on_radar $PORTLAND_SAVE_MARKER 2
+018C: play_sound 94 at 0.0 0.0 0.0
+018D: $111 = create_sound 41 at 850.75 -663.6874 15.0
+018E: stop_sound $131
+0191: remove_vehicle $car from_flipped_check
+0192: set_actor $PATIENT1 objective_to_stand_still
+0193: set_actor $PED_FOR_TAXIMISSION objective_to_act_like_ped
+0194: set_actor $JOEY2_TRIAD1 objective_to_guard_point 976.0625 -715.2499 14.1875
+0197:   player $PLAYER_CHAR 0 1089.875 -223.8749 1084.5 -228.4999
+019B:   player $PLAYER_CHAR stopped 0 1089.875 -223.8749 1084.5 -228.4999
+019C:   player $PLAYER_CHAR 0 891.1875 -309.6874 7.6875 899.25 -303.2499 12.6875
+019D:   player $PLAYER_CHAR 0 1339.5625 -459.4999 49.0 1332.75 -462.7499 53.0
+01A0:   player $PLAYER_CHAR stopped 0 839.1875 -667.3749 14.0 842.0625 -673.8749 17.0
+01A1:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 0@ 1@ cornerB 2@ 3@ on_foot
+01A2:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 82@ 83@ cornerB 84@ 85@ in_car
+01A3:   actor $ACTOR sphere 0 in_rectangle_cornerA 1364.0625 -614.4999 1473.75 cornerB -560.1874
+01A4:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1@ 2@ cornerB 3@ 4@ stopped_on_foot
+01A5:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 2@ 3@ cornerB 4@ 5@ stopped_in_car
+01A8:   actor $LUIGI5_PROSTITUTE1 stopped 0 1003.5 -882.9999 13.875 996.75 -876.3749 18.0
+01AA:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1@ 2@ 3@ cornerB 4@ 5@ 6@ stopped_in_car
+01AB:   car $3721 stopped 0 -1049.1249 -77.4374 -1037.1874 -69.1249
+01AC:   car $1483 stopped 0 1135.75 55.5 -0.9999 1149.75 46.25 9.0
+01AD:   car $BUSTED_HELP_ENFORCER sphere 0 near_point 1133.0 -668.9999 radius 3.0 3.0
+01AE:   car $FRANK1_ENFORCER1 stopped 0 1252.0 -1085.9999 18.0 18.0
+01AF:   car $FRANK1_ENFORCER1 0 $2068 $2069 $2070 radius 2.0 2.0 2.0
+01B0:   car $1497 stopped 0 1195.5625 -804.9999 13.6875 radius 4.0 4.0 4.0
+01B1: give_player $PLAYER_CHAR weapon 4 ammo 20
+01B2: give_actor $CHAR_GUNSHOPOWNER weapon 4 ammo 999
+01B4: set_player $PLAYER_CHAR control 0
+01B5: force_weather 0
+01B6: set_weather 3
+01B7: release_weather
+01B8: set_player $PLAYER_CHAR armed_weapon_to 4
+01B9: set_actor $TONI_CIPRIANI armed_weapon_to 0
+01BB: store_object $TRIAD_FISH_FACTORY_GATE position_to $1090 $1091 $1092
+01BC: put_object $AIRPORT_DOOR1 at -770.3749 -599.2499 11.8125
+01BD: $DODO_TAKEOFFTIME = current_time_in_ms
+01BE: set_actor $8BALL_CHAR to_look_at_spot 811.875 -939.9374 35.75
+01C0: $1149 = player $PLAYER_CHAR wanted_level
+01C1:   car $VIGILANTE_CRIMINALS_CAR stopped
+01C2: remove_references_to_actor $FACTORY_TRIAD1 // Like turning an actor into a random pedestrian
+01C3: remove_references_to_car $CAR_PORTLAND_IMPORT
+01C4: remove_references_to_object $LUIGI5_POLICE_BALL_SIGN // This object will now disappear when the player looks away
+01C5: remove_actor_from_mission_cleanup_list $hActor
+01C6: remove_car_from_mission_cleanup_list $hCar
+01C7: remove_object_from_mission_cleanup_list $PLAYER_DOOR
+01C8: $LUIGI4_PIMP = create_actor_pedtype 4 model #PIMP in_car $LUIGI4_PIMP_CAR passenger_seat 0
+01C9: actor $MEAT4_CARLOS kill_actor $1526
+01CA: actor $CHAR_GUNSHOPOWNER kill_player $PLAYER_CHAR
+01CB: actor $3818 kill_actor $3854
+01CC: actor $CRIMINAL_FOR_VIGILANTE kill_player $PLAYER_CHAR
+01CE: actor $CRIMINAL_FOR_VIGILANTE avoid_player $PLAYER_CHAR
+01D0: actor $LUIGI2_PROSTITUTE1 avoid_player $PLAYER_CHAR
+01D1: actor $MARIA follow_actor $CHICO_DRUGDEALER
+01D2: actor $LUIGI3_MISTY follow_player $PLAYER_CHAR
+01D3: actor $PATIENT1 leave_car $PARAMEDIC_MISION_CAR
+01D4: actor $BUSTED_HELP_SWAT_2 go_to_car $BUSTED_HELP_ENFORCER and_enter_it_as_a_passenger
+01D5: actor $WASTED_HELP_MEDIC go_to_and_drive_car $WASTED_HELP_AMBULANCE
+01D9: actor $CRIMINAL_FOR_VIGILANTE destroy_car $1427
+01DE: tie_actor $TONI4_TRIAD4 to_actor $TONI4_TRIAD1
+01DF: tie_actor $MISTY_CHAR to_player $PLAYER_CHAR
+01E0: clear_leader $MEAT4_CARLOS
+01E1: set_actor $FRANK3_CARTEL3 follow_route 0 3
+01E2: add_route_point 0 at 1533.875 -925.9999 -99.9999
+01E3: text_1number_styled "GXT" number 27@ time 5000 style 1
+01E5: show_text_1number_highpriority GXT 'LOW_38' number 271@ time 5000 flag 1  // ~s~You need $~1~ to compete.
+01E7: remove_forbidden_for_cars_cube 824.875 -633.7499 13.0 845.25 -693.7499 18.0
+01E8: create_forbidden_for_cars_cube 619.5625 -911.4999 45.0 834.25 -954.4999 32.0
+01E9: $1286 = car $PARAMEDIC_MISION_CAR num_passengers
+01EA: $1285 = car $PARAMEDIC_MISION_CAR max_passengers
+01EB: set_car_density_to 0.0
+01EC: make_car 0@ very_heavy 1
+01ED: clear_actor $8BALL_CHAR threat_search
+01EE: activate_crane 1570.25 -675.3749 1638.6875 -687.0624 1647.875 -700.0624 1571.0625 -696.4999 16.0 0.0
+01EF: deactivate_crane 1570.25 -675.3749
+01F0: set_max_wanted_level_to 4
+01F3:   car $735 airborne
+01F4:   car $VIGILANTE_CRIMINALS_CAR flipped
+01F5: $PLAYER_ACTOR = create_emulated_actor_from_player $PLAYER_CHAR
+01F6: cancel_override_restart
+01F7: set_player $PLAYER_CHAR ignored_by_cops_state_to 1
+01F9: init_rampage_gxt 'RAMPAGE' weapon 5 time_limit 30000 targets 30 target_models #CABBIE #TAXI #CABBIE #TAXI completed_text 1
+01FA: $FLAG_RAMPAGE_STATUS = rampage_status
+01FB: $769 = square_root $768
+01FC:   player $PLAYER_CHAR near_car $3101 radius 20.0 20.0 0
+01FD:   player $PLAYER_CHAR near_car_on_foot $3721 radius 15.0 15.0 0
+0202:   actor $3738 near_car $3721 radius 40.0 40.0 sphere 0
+0203:   actor $ASUKA1_MAFIA11 near_car_on_foot $2494 radius 4.0 4.0 unknown 0
+0204:   actor $ASUKA1_MAFIA1 near_car_in_car $2498 radius 10.0 10.0 unknown 0
+0208: $PATIENT_Z_ANGLE = random_float 0.0 359.875
+0209: $1301 = random_int_in_ranges 0 2
+020A: set_car $CAR_PORTLAND_IMPORT door_status_to 1
+020B: explode_car $FIRE_MISSION_CAR
+020C: create_explosion 5 at 965.75 -1111.8749 15.5
+020D:   car $735 flipped
+020E: actor $MEAT4_CARLOS look_at_actor $1526
+020F: actor $PED_FOR_TAXIMISSION look_at_player $PLAYER_CHAR
+0210: player $PLAYER_CHAR look_at_actor $MARIA
+0211: actor $PATIENT1 walk_to $PARAMEDIC_INSIDE_HOSPITAL_X $PARAMEDIC_INSIDE_HOSPITAL_Y
+0213: $98 = create_pickup #COLT45 type 6 at 1068.5 -400.7499 15.1875
+0214:   pickup $WASTED_INFO_PICKUP picked_up
+0215: destroy_pickup $WASTED_INFO_PICKUP
+0216: set_car $TAXI_MISSION_CAR taxi_available_light_to 1
+0217: text_styled "GXT" time 3000 style 1
+0218: text_1number_styled 'REWARD' $vigilante_bonus 6000 ms 6  // REWARD $~1~
+0219: $PORTLAND_HIDEOUT_GARAGE = create_garage 16 from 891.25 -311.0624 7.6875 898.375 -315.4999 12.6875
+021B: set_garage $LUIGIS_LOCKUP_GARAGE to_accept_car $LUIGI2_DEALER_CAR
+021C:   car_inside_garage $KENJI_LOCKUP_GARAGE
+021D: set_free_bomb_shop_to 1
+0220:   car $car_handle has_car_bomb
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0
+0222: set_player $PLAYER_CHAR health_to 100
+0223: set_actor $RAY2_PHIL health_to 5
+0224: set_car $PARAMEDIC_MISION_CAR health_to $PARAMEDIC_CAR_HEALTH
+0226: $JOEY2_CHUNKY_HEALTH = actor $CHUNKY_LEE_CHONG health
+0227: $1283 = car $PARAMEDIC_MISION_CAR health
+0228:   car $LIPSFORELLI_CAR bomb_status == 5
+0229: set_car $EIGHT_CAR color_to 58 1
+022A: remove_forbidden_for_peds_cube 1609.75 -615.1874 9.0 1557.75 -673.3749 20.0
+022B: create_forbidden_for_peds_cube 659.5625 200.0 -24.9999 945.75 147.5 5.0
+022C: set_actor $BUSTED_HELP_SWAT_2 to_look_at_actor $BUSTED_HELP_DIABLO
+022D: set_actor $CHAR_GUNSHOPOWNER to_look_at_player $PLAYER_CHAR
+022E: set_player $PLAYER_CHAR to_look_at_actor $TONI_CIPRIANI
+022F: set_actor $BUSTED_HELP_SWAT_1 stop_looking
+0230: set_player $PLAYER_CHAR stop_looking
+0231: enable_second_police_heli 0
+0235: set_gang 1 models_to #MODEL #MODEL
+0236: set_gang 0 car_to #MAFIA
+0237: set_gang 0 primary_weapon_to 2 secondary_weapon_to 2
+0239: actor $8BALL_CHAR run_to 892.6875 -308.5624
+023C: load_special_actor 'model' as 1
+0240: unknown $4102 1
+0241:   player $player_char in_remote_mode
+0242: set_car $BLOWFISH_GARBAGE_TRUCK bomb_status_to 1
+0243: set_actor $CHAR_GUNSHOPOWNER ped_stats_to 16
+0244: set_cutscene_pos -537.3749 1051.1875 36.875
+0245: set_actor $8BALL_CHAR walk_style_to 9
+0247: request_model #GANG03
+0248:   model #SENTINEL available
+0249: release_model #GANG03
+024A: $PHONE_DIABLOS = create_phone_at 937.875 -230.0624
+024C: text_phone $phone_ray1 'AM4_1A'
+024E: disable_phone $PHONE_MARTY
+024F: create_corona 1.0 5 0 with_color 0 200 200 at_point $OFFROAD_CHECKPOINT_1_X $OFFROAD_CHECKPOINT_1_Y $OFFROAD_CHECKPOINT_1_Z
+0250: create_light_at 780.5 -942.8749 39.0 RGB_values 235 255 250
+0253: save_current_time
+0255: set_critical_mission_restart_at 811.875 -939.9374 35.75 angle 180.0
+0256:   player $PLAYER_CHAR defined
+0291: unknown_actor $CRIMINAL_FOR_VIGILANTE unknown_behavior_flag 1
+0293: $CURRENT_CONTROLS = get_controller_mode
+0294: set_car $LIPSFORELLI_CAR resprayable 0
+0296: unload_special_actor 4
+0297: clear_rampage_kills
+0298: $RC_BUGGY_KILLS = rampage_kills #DIABLOS
+0299: activate_garage $WITSEC_HOUSE_GARAGE
+029B: $PLAYER_DOOR = init_object #PLAYERSDOOR at 890.875 -307.6874 8.75
+029C:   $USJ_CAR stopped
+029F:   player $PLAYER_CHAR stopped
+02A0:   actor $FRANK1_PARTY_PERSON1 stopped
+02A1: (unknown) 3500 1
+02A2: create_particle 4 0 at 791.625 -936.8749 38.3125
+02A3: toggle_widescreen 0
+02A7: $LUIGI_MISSION_MARKER = create_icon_marker_and_sphere 13 at 892.75 -425.7499 13.875
+02A8: $P_AND_S_MARKER = create_marker 18 at 925.0 -359.4999 -99.9999
+02A9: set_actor $PATIENT1 immune_to_nonplayer 1
+02AA: set_car $FIRE_MISSION_CAR immune_to_nonplayer 1
+02AB: set_actor $JOEY4_TRIAD1 immunities BP 1 FP 1 EP 1 CP 1 MP 1
+02AC: set_car $JOEY3_VAN immunities BP 1 FP 1 EP 1 CP 1 MP 1
+02B3:   player $PLAYER_CHAR in_cube 1247.5625 -821.9999 12.0 1253.9375 -814.9999 18.0 radius 14.0 sphere 0
+02B4:   player $PLAYER_CHAR in_cube_on_foot 1466.1875 -174.9999 50.0 1452.875 -172.0624 60.0 radius 11.5625 sphere 0
+02B9: deactivate_garage $WITSEC_HOUSE_GARAGE
+02BC: set_cop_behaviour 0
+02BF:   car $735 sunk
+02C0: set $PARAMEDIC_CREATE_PATIENT_X $PARAMEDIC_CREATE_PATIENT_Y $PARAMEDIC_CREATE_PATIENT_Z to_ped_path_coords_closest_to $PARAMEDIC_PATIENT_RANDOM_X $PARAMEDIC_PATIENT_RANDOM_Y $1349
+02C1: set $1394 $1395 $1396 to_car_path_coords_closest_to $1387 $1388 $1393
+02C2: car $BUSTED_HELP_ENFORCER drive_to_point 1133.0 -668.9999 15.0
+02C3: create_donkey_mags 0
+02C5: $2433 = donkey_mags_picked_up
+02C6: remove_pickup_items_from_ground
+02C7: scatter_platinum 90 at -1079.9999 -163.1874 -99.9999 100.0
+02C8: $4207 = platinum_pieces_in_car
+02C9: remove_platinum_from_car
+02CA:   car $LUIGI4_PIMP_CAR bounding_sphere_visible
+02CB:   actor $RAY1_WITNESS bounding_sphere_visible
+02CD: call @NONAME_79_67 @NONAME_79_67
+02CE: $3196 = ground_z $3194 $3195 $3196
+02CF: $1978 = create_fire_at 966.0 -1111.7499 13.75
+02D0:   fire $hFire extinguished
+02D1: remove_fire $hFire
+02D3: boat $ASUKA3_REPORTER_BOAT drive_to 744.75 -350.0624 0.0
+02D4: unknown_turn_off_car $FRANK4_BOAT engine
+02D5:   player $PLAYER_CHAR firing_weapons_in_rectangle 1610.5625 -614.5624 1340.875 -1074.4999 0
+02D7:   player $PLAYER_CHAR currentweapon == 2
+02D8:   actor $PLAYER_ACTOR current_weapon == 1
+02D9: donkey_mags_picked_up = none
+02DB: set_boat $ASUKA3_REPORTER_BOAT speed_to 48.0
+02DD: get_random_actor $ped_for_taximission in_zone 'IND_ZON'
+02DE:   player $PLAYER_CHAR driving_taxi_vehicle
+02DF: unknown_player $PLAYER_CHAR
+02E0:   actor $hActor firing_weapon
+02E1: $3315 = create_cash_pickup 20000 at 238.9375 -993.6874 21.0
+02E2: set_actor $ASUKA2_MAFIA4 weapon_accuracy_to 70
+02E3: $USJ_CAR_SPEED = car $USJ_CAR speed
+02E5: $CUTSCENE_PLAYER = create_cutscene_object #SPECIAL04
+02E6: set_cutscene_anim $cutscene_player 'PLAYER'
+02E7: start_cutscene
+02E8: $CUT_SCENE_TIME = cutscenetime
+02EA: end_cutscene
+02EB: restore_camera_with_jumpcut
+02EC: put_hidden_package_at 1105.25 -1019.9999 25.0625
+02ED: set_total_hidden_packages_to 100
+02EF: projectile_in_cube 376.0625 -445.1874 28.0625 380.0625 -441.1874 31.6875
+02F1: unknown_create_gta3_exploding_barrel_at $3194 $3195 $3196
+02F2:   actor $hActor model == #MODEL
+02F3: load_object #CUTOBJ01 'CS_BAN'
+02F4: create_cutscene_actor $INTRO_CATALINA from_head #CUTOBJ05 and_body $INTRO_CATALINAS_BODY
+02F6: $972 = sine $981
+02F7: $973 = cosine $981
+02F8: get_car $RAY4_GHOST Z_angle_sine_to $3203
+02F9: get_car $RAY4_GHOST Z_angle_cosine_to $3204
+02FA: garage $PORTLAND_IE_GARAGE change_to_type 19
+02FB: create_crusher_crane 1119.75 51.75 1135.75 56.0625 1149.75 46.25 1143.0 59.875 5.0 180.0
+02FF: show_text_3numbers GXT 'GXT' numbers 1 2 3 time 3000 flag 1
+0302: show_text_4numbers GXT "GXT" numbers 1 2 3 4 time 3000 flag 1
+0308: show_text_6numbers GXT 'GXT' numbers 1 2 3 4 5 6 time 5000 flag 5
+030C: progress_made += 1
+030D: set_total_mission_points_to 154
+030E: save_jump_distance $769
+030F: save_jump_height $HEIGHEST_Z
+0310: save_jump_flips $JUMP_FLIPS
+0311: save_jump_rotation $JUMP_ROTATION
+0312: save_jump_type 1
+0313: increment_unique_jumps_found
+0314: set_total_unique_jumps_to 20
+0315: increment_taxi_dropoffs
+0316: save_taxi_earnings_from $TOTAL_TAXI_EARNINGS
+0317: increment_mission_attempts
+0318: set_latest_mission_passed 'GXT'
+0319: set_actor $PATIENT1 running 1
+031A: remove_all_fires
+031D:   actor $4215 hit_by_weapon 1
+031E:   vehicle $CAR hit_by_weapon 39
+0321: kill_actor $PATIENT1
+0323: enable_boat $FRANK4_BOAT anchor 1
+0325: $1367 = create_car $FIRE_MISSION_CAR fire
+0327: $2494 = create_random_car_with_actors -1 in_area 900.4375 -431.8749 905.75 -419.9374
+0329:   garage $PORTLAND_PAYNSPRAY_GARAGE respray_done
+032A: set_behind_camera_mode_to 0
+032B: $602 = create_weapon_pickup #AK47 14 ammo 60 at 1249.0 -858.4999 20.5625
+032C: car $BUSTED_HELP_POLICECAR_2 ram $BUSTED_HELP_DIABLOCAR
+032D: car $3727 block $3721
+0330: set_player $PLAYER_CHAR infinite_run_to 1
+0331: set_player $PLAYER_CHAR fast_reload 1
+0332: set_actor $PATIENT1 bleeding_to 1
+0335: set_free_paynspray_to 1
+0336: set_player $PLAYER_CHAR visible 0
+0339:   objects_in_cube 870.375 -309.8749 6.0 865.1875 -314.6874 12.0 0 1 1 1 1
+033A: create_incoming_cessna
+033B:   incoming_cessna_landed
+033C:   incoming_cessna_destroyed
+033F: set_text_draw_letter_width_height 0.75 1.0
+0340: set_text_draw_color 190 190 190 $1122
+0341: set_text_draw_align_justify 1
+0342: set_text_draw_centered 1
+0343: set_text_linewidth 320.0
+0344: set_text_draw_linewidth 580.0 for_centered_text
+0345: enable_text_draw_background 1
+0346: set_text_draw_background_color 0 0 0 $1122
+0348: enable_text_draw_proportional 1
+0349: text_draw_style = 0
+034A: portland_complete
+034B: staunton_complete
+034C: shoreside_complete
+034D: rotate_object $FUZZBALL_DOOR1 from_angle 180.0 to_angle 10.0 flag 0
+034E: move_object $AIRPORT_DOOR1 to -770.3749 -597.8124 11.8125 speed 0.0625 0.0625 0.0625 collision_check 0
+034F: destroy_actor_with_fade $PATIENT1 // The actor fades away like a ghost
+0350: set_actor $CHAR_GUNSHOPOWNER stay_in_place 1
+0351:   gore_enabled
+0353: refresh_actor $PLAYER_ACTOR
+0354: set_up_chase_scene 1.0
+0355: clean_up_chase_scene
+0358: start_drug_drop_off
+0359:   drop_off_cessna_shot_down
+035A: find_drop_off_plane_coords $3440 $3441 $3442
+035B: $3422 = create_drop_off_package $3440 $3441 $3442
+035C: place_object $3095 relative_to_car $3101 offset 0.25 -1.6874 -0.0624
+035D: make_object $FAKETARGET1 targetable
+035F: set_actor $CHUNKY_LEE_CHONG armour_to 100
+0360: open_garage $PORTLAND_IE_GARAGE
+0361: close_garage $PORTLAND_IE_GARAGE
+0362: remove_actor $ASUKA3_REPORTER from_car_and_place_at 547.25 -778.3749 -99.9999
+0363: toggle_model_render_at 1027.25 -933.7499 15.0 radius 50.0 object #INDHELIX_BARRIER 0
+0365: set_actor $PED_FOR_TAXIMISSION objective_to-29
+0366: (unknown) $3943
+0367: init_gta3_rampage 'PAGE_00' 7 120000 $var_rampage_amount7 #GANG09 #GANG10 #PLAYERSDOOR #PLAYERSDOOR 0
+0368: create_ev_crane 1570.25 -675.3749 1565.6875 -686.4999 1576.75 -706.5624 1639.875 -696.6874 26.0 0.0
+0369: put_player $PLAYER_CHAR in_car $JOEY4_LIMO
+036A: put_actor $CRIMINAL_FOR_VIGILANTE in_car $VIGILANTE_CRIMINALS_CAR
+036D: text_2numbers_styled "GXT" numbers 2@ 3@ time 3000 style 1
+0372: set_actor $CHICO_DRUGDEALER anim 0 wait_state_time 100 ms
+0373: set_camera_directly_behind_player
+0374: set_motion_blur 5
+0376: $PATIENT1 = create_random_actor $PARAMEDIC_CREATE_PATIENT_X $PARAMEDIC_CREATE_PATIENT_Y $PARAMEDIC_CREATE_PATIENT_Z
+0377: set_actor $CRIMINAL_FOR_VIGILANTE steal_any_car
+037F: give_player_detonator
+0381: throw_object $1983 distance -9.9999 6.0 18.0
+0382: set_object $3095 collision_detection 0
+038B: load_requested_models
+038C: object $3095 scatter 0.0 0.0 16.0
+038D: draw_texture 17 position $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 size 20@ 19@ RGBA 128 128 128 255
+038F: load_texture "DOWN" as 1 // Load dictionary with 0390 first
+0390: load_txd_dictionary 'LD_BEAT'
+0391: release_textures
+0392: object $1983 toggle_in_moving_list 1
+0394: play_music 1
+0395: clear_area 1 at 888.5625 -308.3749 range -99.9999 1.0
+0396: 1 useless_flag
+0397: car $WASTED_HELP_AMBULANCE siren = 1
+0399: create_forbidden_for_peds_angled_cube 1222.875 -838.3749 13.5 1256.25 -804.8749 16.0 angle 58.0
+039C: set_car $LUIGI4_PIMP_CAR watertight 1
+039D: scatter_particles 19 1.0 0 0 0 0 at $1123 $1124 $1125 $1126 $1127 $1128
+039E: (unknown) $1484 1
+039F: car $DIABLO1_CHEETAH1 race_to $DIABLO1_NEXT_CHECKPOINT_X_FOR_CHEETAH1 $DIABLO1_NEXT_CHECKPOINT_Y_FOR_CHEETAH1
+03A2: set_car $JOEY4_LIMO status 0
+03A3:   is_actor $PATIENT1 male
+03A4: name_thread 'MAIN'
+03A5: set_garage $SECURICAR_GARAGE type_to 7 118
+03A6: get_drug_plane_coords $4099 $4100 $4101
+03A7: save_int_to_debug_file 1
+03A8: save_float_to_debug_file 1.0
+03A9: save_newline_to_debug_file
+03AA: play_suspect_last_seen_at $1436 $1437 $1438
+03AB: set_car $FORELLI_CAR1 strong 1
+03AC: clear_route 0
+03AD: set_rubbish 0
+03AE: remove_objects_from_cube 804.0 -947.9999 30.0 765.125 -924.3124 50.0
+03AF: set_streaming 0
+03B1:   garage $SALVATORES_GARAGE door_closed
+03B2: start_catalina_flyby
+03B3: catalina_take_off
+03B4: remove_catalina_heli
+03B5:   catalina_shot_down
+03B6: replace_model_at 1027.25 -933.7499 15.0 radius 50.0 from #INDHELIX_BARRIER to #LOD_LAND014
+03B7: process_cut_scene_only 0
+03B8: clear_weapons_from_player $PLAYER_CHAR
+03B9: create_catalinas_chopper $CAT1_CHOPPER
+03BA: clear_cars_from_cube 266.8125 -610.8749 30.375 306.25 -479.8749 34.8125
+03BB: set_garage $SALVATORES_GARAGE door_type_to_swing_open
+03BC: $1607 = create_sphere 925.0625 -350.4999 9.25 2.5
+03BD: destroy_sphere $1607
+03BE: catalina_heli_drop_explosives_on_player
+03BF: set_player $PLAYER_CHAR ignored_by_everyone_to 1
+03C0: $hCar = actor $hActor car
+03C1: $735 = player $PLAYER_CHAR car_no_save
+03C5: create_random_car_for_carpark 311.5 -510.2499 28.0625 91.0
+03C6:   current_island == 1
+03C7: set_sensitivity_to_crime_to 0.5
+03C8: set_camera_directly_before_player
+03C9:   car $LIPSFORELLI_CAR damaged
+03CA:   object $13 exists
+03CB: set_camera -559.6249 1030.5 40.0
+03CC: car $FRANK2_TAXI add_to_stuck_car_check 5.0 = 30000
+03CD: car $FRANK2_TAXI remove_from_stuck_car_check
+03CE:   car $FRANK2_TAXI stuck
+03CF: load_wav 'DOOR_1'
+03D0:   wav_loaded
+03D1: play_wav
+03D2:   wav_ended
+03D3: point $1436 $1437 $1438 get_nearby_vector $1436 $1437 $1438 $1445
+03D4:   garage $PORTLAND_IE_GARAGE contains_neededcar 1
+03D5: remove_text 'GXT'
+03D6: remove_styled_text "GXT"
+03D7: set_wav_location $2074 $2075 $2076
+03D8: show_save_screen
+03D9:   save_done
+03DA: set_garage $PORTLAND_IE_GARAGE camera_follows_player
+03DC: $LUIGI2_BAT_MARKER = create_marker_above_pickup $LUIGI2_BAT_PICKUP
+03DD: pickup $LUIGI4_COLT45_PICKUP show_on_radar 20 $1637
+03DE: set_pedestrians_density_multiplier_to 0.0
+03DF: all_random_peds #PIMP
+03E0: draw_text_behind_textures 0
+03E1: $VAR_NUM_HIDDEN_PACKAGES_FOUND = packages_found
+03E2: actor $DIABLO1_RACE_TIME exit_car
+03E3: set_texture_to_be_drawn_antialiased 1
+03E4: set_text_draw_align_right 0
+03E5: show_text_box 'TEXT'
+03E6: remove_text_box
+03E7: flash_hud 4
+03EA: generate_cars_around_camera 1
+03EB: clear_small_messages_only
+03EC:   ev_crane_collected_all_cars
+03ED: set_car $VIGILANTE_CRIMINALS_CAR not_damaged_when_upside_down 1
+03EE:   player $PLAYER_CHAR controllable
+03EF: player $PLAYER_CHAR make_safe
+03F0: enable_text_draw 1
+03F1: pedtype 12 add_threat 1
+03F2: pedgroup 8 remove_threat 1
+03F3: get_car $EIGHT_CAR color $1581 $1582
+03F4: set_all_cars_can_be_damaged 1
+03F7: load_island_data 0
+03F8: (unknown) $3248
+03F9: make_actors $LUIGI2_DEALER $LUIGI2_PROSTITUTE1 converse_in -1 ms
+03FB: set_car $ASUKA5_TANNER_CAR stays_on_current_island 1
+03FC: set_actor $MARIA stays_on_current_island 0
+03FD: save_offroad_time $386
+03FE: save_offroadII_time $387
+03FF: save_offroadIII_time $388
+0400: save_mayhem_time $389
+0401: increment_people_saved_in_ambulance
+0402: increment_criminals_stopped
+0403: save_highest_ambulance_level $PARAMEDIC_MISSION_LEVEL
+0404: increment_fires_extinguished
+0405: enable_phone $PHONE_MARTY
+0406: save_dodo_flight_time $DODO_FLIGHTTIME
+0407: time_taken_defuse_mission = $4199
+0408: set_total_rampages_to 20
+0409: blow_up_rc_buggy
+040A: remove_car_from_chase 2
+040D: clear_mission_audio
+0410: override_gang_model 6 0
+0411: set_actor $ASUKA1_MAFIA14 use_pednode_seek 1
+0413: enable $PLAYER_CHAR get_out_of_jail_free 1
+0417: start_mission INTRO // Intro Movie
+0418: set_object $1106 draw_last 1
+0419: $RAY1_WITNESS_CAR = player $PLAYER_CHAR weapon 11 ammo
+041A: 41@ = actor $PLAYER_ACTOR weapon 9 ammo
+041C: make_actor $CHAR_GUNSHOPOWNER say 103
+041D: set_camera_near_clip 2.5
+041E: set_radio_station 0 0
+041F: override_hospital 2
+0420: override_police_station 2
+0421: toggle_rain 1
+0422:   garage_contain_car $LUIGIS_LOCKUP_GARAGE $LUIGI2_DEALER_CAR
+0424:   metric
+0426: create_save_cars_between_levels_cube 619.5625 -911.4999 45.0 834.25 -954.4999 32.0
+0428: set_car $VIGILANTE_CRIMINALS_CAR avoid_level_transitions 1
+042A:   ped_threat_exists 8 1
+042B: clear_peds_from_cube 1164.25 -888.8124 10.0 1291.75 -811.6874 20.0
+042C: set_total_missions_to 73
+042D: $JUMP_DIST = metric_to_imperial $JUMP_DIST
+042E: downdate_integer_stat 4 to 0@
+042F: save_record 1 $RC1_RECORD
+0431:   car $CAR passenger_seat_free 0
+0433: set_actor $CRIMINAL_FOR_VIGILANTE criminal_flag 1
+0434: show_credits
+0435: end_credits
+0436:   reached_end_of_credits
+0437: scatter_particle 5 0.0 at $1123 $1124 $1125 $1126 $1127 $1128
+0438: set_actor $MARIA ignore_level_transitions 1
+043A: start_boat_foam_animation
+043B: update_boat $165 foam_animation
+043C: set_game_sounds_fade 0
+043D: unknown_set_play_intro_flag 1
+043F: play_cutscene_music
+0440: stop_cutscene_music
+0441: $car_model = car $hCar model
+0442:   player $PLAYER_CHAR in_car $4166
+0444: create_fire_audio $2963 1
+0445:   are_car_cheats_used
+0446: set_actor $actor dismemberment_possible 0
+0447: (unknown) $PLAYER_CHAR
+0448:   actor $actor in_car $car
+0449:   actor $PLAYER_ACTOR in_a_car
+044C: change_to_island 2
+044D: load_splash 'NEWS'
+044E: car $3721 level 1
+044F: (unknown) $LIPSFORELLI_CAR 1
+0450: car $3812 warp_to_player
+0451: load_end_of_game_audio
+0452: enable_player_control_camera
+045B: draw_text_2numbers 320.0 390.0 GXT 'TIME' numbers 0@ 1@  // ~1~:~1~
+0477: set_car 5@ action 6 time 200
+0494: get_joystick 0 data_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y
+04F0:   is_actor_waiting_for_world_collision $CAR
+04F1:   is_car_waiting_for_world_collision $CAR
+05DC: end_custom_thread
+05DD: end_custom_thread_named 'KEN1'
+05DE: create_custom_thread 'ct.s'
+05DF: write_memory 0xA10B2E size 1 value 0 virtual_protect 0
+05E0: 0@ = read_memory 1@ size 4 virtual_protect 0
+05E1: call 0x55BFC0 num_params 3 pop 3 0 0 0@
+05E2: call_function 0x4BC1E0 num_params 0 pop 0 0@
+05E3: call_method 0x4DF240 struct 0@ num_params 3 pop 3 0.0 0.0 0.0
+05E4: call_function_method 0x5BAA80 struct 0@ num_params 0 pop 0 1@
+05E5: 0@ = game_version
+05E6: 0@ = actor 0@ struct
+05E7: 0@ = car 0@ struct
+05E8: 0@ = object 0@ struct
+05E9: 0@ = ped_struct 0@ handle
+05EA: 0@ = vehicle_struct 0@ handle
+05EB: 0@ = object_struct 0@ handle
+05EC: 0@ = current_thread_pointer
+05ED: 0@ = thread 'MAIN' pointer
+05EE:   key_pressed 0x20  // VK_...
+05EF: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 10.0 find_next 1 pass_deads 0 //IF and SET
+05F0: 3@ = random_vehicle_near_point 0@ 1@ 2@ in_radius 10.0 find_next 1 pass_wrecked 0 //IF and SET
+05F1: 3@ = random_object_near_point 0@ 1@ 2@ in_radius 10.0 find_next 1 //IF and SET
+05F2: 0@ = pop_float
+05F3: 0@ = 2 exp 0.5 //all floats
+05F4: 0@ = log 0@ base 2 // all floats
+05F5: call_scm_func @func params_count 0
+05F6: ret 0

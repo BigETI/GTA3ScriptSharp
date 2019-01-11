@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,8 +46,13 @@
     <Compile Include="AGTA3Script.cs" />
     <Compile Include="AGTA3ScriptRuntime.cs" />
     <Compile Include="EGame.cs" />
-    <Compile Include="EGTA3ScriptDataType.cs" />
+    <Compile Include="EGTA3ScriptGTAIIIDataType.cs" />
     <Compile Include="EGTA3ScriptFilesMode.cs" />
+    <Compile Include="EGTA3ScriptGTALibertyCityStoriesDataType.cs" />
+    <Compile Include="EGTA3ScriptGTASanAndreasDataType.cs" />
+    <Compile Include="EGTA3ScriptGTAViceCityDataType.cs" />
+    <Compile Include="EGTA3ScriptGTAViceCityStoriesDataType.cs" />
+    <Compile Include="EReferenceType.cs" />
     <Compile Include="GTA3Script.cs" />
     <Compile Include="GTA3ScriptExecutionException.cs" />
     <Compile Include="GTA3ScriptGTAIIIRuntime.cs" />
@@ -56,8 +62,12 @@
     <Compile Include="GTA3ScriptGTAViceCityStoriesRuntime.cs" />
     <Compile Include="GTA3ScriptCommand.cs" />
     <Compile Include="GTA3ScriptInstruction.cs" />
+    <Compile Include="GTA3ScriptLoadException.cs" />
     <Compile Include="GTA3ScriptOpCodeCallDelegate.cs" />
+    <Compile Include="GTA3ScriptReferenceArray.cs" />
+    <Compile Include="GTA3ScriptReferenceValue.cs" />
     <Compile Include="GTA3ScriptRuntimeProvider.cs" />
+    <Compile Include="GTA3ScriptStreamedScriptData.cs" />
     <Compile Include="SC.cs" />
     <Compile Include="GTA3ScriptFiles.cs" />
     <Compile Include="IR2.cs" />
