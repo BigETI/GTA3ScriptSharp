@@ -11,7 +11,7 @@ namespace GTA3ScriptSharp
     public class GTA3ScriptInstruction
     {
         /// <summary>
-        /// On call event
+        /// GTA3Script instruction on call event
         /// </summary>
         public event GTA3ScriptOpCodeCallDelegate OnCall;
 
@@ -38,12 +38,12 @@ namespace GTA3ScriptSharp
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="onCall">On call event</param>
         /// <param name="argumentTypes">GTA3Script operation instruction types</param>
-        public GTA3ScriptInstruction(GTA3ScriptOpCodeCallDelegate onCall, Type[] argumentTypes)
+        /// <param name="onCall">GTA3Script instruction on call event</param>
+        public GTA3ScriptInstruction(Type[] argumentTypes, GTA3ScriptOpCodeCallDelegate onCall)
         {
-            OnCall = onCall;
             this.argumentTypes = argumentTypes;
+            OnCall = onCall;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace GTA3ScriptSharp
         /// <param name="arguments">GTA3Script operation instruction</param>
         public void Invoke(AGTA3ScriptRuntime runtime, object[] arguments)
         {
-            OnCall?.Invoke(runtime, arguments);
+            OnCall(runtime, arguments);
         }
     }
 }

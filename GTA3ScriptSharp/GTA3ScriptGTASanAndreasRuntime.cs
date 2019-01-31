@@ -14,7 +14,7 @@ namespace GTA3ScriptSharp
         /// </summary>
         public GTA3ScriptGTASanAndreasRuntime()
         {
-            Patch(0x1, (runtime, args) =>
+            /*Patch(0x1, (runtime, args) =>
             {
                 throw new NotImplementedException();
             }, null, "WAIT");
@@ -572,7 +572,7 @@ namespace GTA3ScriptSharp
             Patch(0x0AE9, (runtime, args) =>
             {
                 throw new NotImplementedException();
-            }, null, "POP_FLOAT");
+            }, null, "POP_FLOAT");*/
             
 
             // TODO

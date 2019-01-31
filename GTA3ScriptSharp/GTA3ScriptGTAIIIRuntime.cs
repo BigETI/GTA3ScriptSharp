@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+
 /// <summary>
 /// GTA3Script sharp namespace
 /// </summary>
@@ -13,22 +13,16 @@ namespace GTA3ScriptSharp
         /// <summary>
         /// Default constructor
         /// </summary>
-        public GTA3ScriptGTAIIIRuntime()
+        public GTA3ScriptGTAIIIRuntime() : base()
         {
-            Patch(0x1, (runtime, args) =>
+            /*// Go to the label if the condition result is true.
+            Patch(0x4C, null, typeof(void), (runtime, arguments) =>
             {
+                // TODO
                 throw new NotImplementedException();
-            }, null, "WAIT");
+            }, typeof(GTA3ScriptReferenceValue), typeof(GTA3ScriptReferenceValue));
 
-            Patch(0x2, (runtime, args) =>
-            {
-                throw new NotImplementedException();
-            }, null, "GOTO", "JUMP");
-
-            Patch(0x3, (runtime, args) =>
-            {
-                throw new NotImplementedException();
-            }, null, "SHAKE_CAMERA");
+            AddKeyword(0x4D, "ELSE_GOTO");
 
             Patch(0x4D, (runtime, args) =>
             {
@@ -169,7 +163,7 @@ namespace GTA3ScriptSharp
             {
                 throw new NotImplementedException();
             }, null, "CREATE_OBJECT");
-            
+
             Patch(0x108, (runtime, args) =>
             {
                 throw new NotImplementedException();
@@ -528,7 +522,7 @@ namespace GTA3ScriptSharp
             Patch(0x580, (runtime, args) =>
             {
                 throw new NotImplementedException();
-            }, null, "SET_CHAR_OBJ_BUY_ICE_CREAM");
+            }, null, "SET_CHAR_OBJ_BUY_ICE_CREAM");*/
 
 
             // TODO

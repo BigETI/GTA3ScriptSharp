@@ -95,54 +95,85 @@ namespace GTA3ScriptSharp
         }
 
         /// <summary>
-        /// Read global variable space
+        /// Read game specifier
         /// </summary>
         /// <param name="reader">Binary reader</param>
         /// <param name="version">Version</param>
         /// <returns>Next header chunk offset</returns>
-        private long ReadGlobalVariableSpace(BinaryReader reader, byte[] version)
+        private long ReadGameSpecifier(BinaryReader reader, byte[] version)
         {
             long ret = ReadNextHeaderChunkOffset(reader, version);
             char game = reader.ReadChar();
-            switch (game)
+            switch (Game)
             {
-                case 'l':
-                    if (Game != EGame.GTAIII)
+                case EGame.GTAIII:
+                case EGame.GTAViceCity:
+                case EGame.GTASanAndreas:
+                    switch (game)
                     {
-                        throw new GTA3ScriptLoadException("Target game is GTA III");
+                        case 'l':
+                            if (Game != EGame.GTAIII)
+                            {
+                                throw new GTA3ScriptLoadException("Target game is GTA III");
+                            }
+                            break;
+                        case 'm':
+                            if (Game != EGame.GTAViceCity)
+                            {
+                                throw new GTA3ScriptLoadException("Target game is GTA Vice City");
+                            }
+                            break;
+                        case 's':
+                            if (Game != EGame.GTASanAndreas)
+                            {
+                                throw new GTA3ScriptLoadException("Target game is GTA San Andreas");
+                            }
+                            break;
+                        default:
+                            throw new GTA3ScriptLoadException("Unknown target game specifier \"" + game + "\"");
                     }
                     break;
-                case 'm':
-                    if (Game != EGame.GTAViceCity)
+                case EGame.GTALibertyCityStories:
+                case EGame.GTAViceCityStories:
+
+                    switch (game)
                     {
-                        throw new GTA3ScriptLoadException("Target game is GTA Vice City");
-                    }
-                    break;
-                case 's':
-                    if (Game != EGame.GTASanAndreas)
-                    {
-                        throw new GTA3ScriptLoadException("Target game is GTA San Andreas");
+                        case 'l':
+                            if (Game != EGame.GTALibertyCityStories)
+                            {
+                                throw new GTA3ScriptLoadException("Target game is GTA Liberty City Stories");
+                            }
+                            break;
+                        case 'm':
+                            if (Game != EGame.GTAViceCityStories)
+                            {
+                                throw new GTA3ScriptLoadException("Target game is GTA Vice City Stories");
+                            }
+                            break;
+                        default:
+                            throw new GTA3ScriptLoadException("Unknown target game specifier \"" + game + "\"");
                     }
                     break;
                 default:
-                    throw new GTA3ScriptLoadException("Unknown target game specifier \"" + game + "\"");
+                    throw new GTA3ScriptLoadException("Unknown game \"" + game + "\"");
             }
             return ret;
         }
 
         /// <summary>
-        /// 
+        /// Read alignment or chunk index
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="version"></param>
+        /// <param name="alignment">Alignment</param>
         /// <returns>Next header chunk offset</returns>
-        private long ReadAlignment(BinaryReader reader, byte[] version)
+        private long ReadAlignmentChunkIndex(BinaryReader reader, byte[] version, byte alignmentChunkIndex, bool isChunkIndex)
         {
             long ret = ReadNextHeaderChunkOffset(reader, version);
-            byte alignment = reader.ReadByte();
-            if (alignment != 0)
+            byte alignment_chunk_index = reader.ReadByte();
+            if (alignment_chunk_index != alignmentChunkIndex)
             {
-                throw new GTA3ScriptLoadException("Alignment is not zero");
+                throw new GTA3ScriptLoadException((isChunkIndex ? "Chunk index " : "Alignment ") + " is not " + alignmentChunkIndex + ", but is " + alignment_chunk_index);
             }
             return ret;
         }
@@ -178,9 +209,9 @@ namespace GTA3ScriptSharp
         /// <param name="numMissions">Number of missions</param>
         /// <param name="numExclusiveMissions">Number of exclusive missions</param>
         /// <returns>Next header chunk offset</returns>
-        private long ReadSizes(BinaryReader reader, byte[] version, out uint mainScriptSize, out uint largestMissionScriptSize, out ushort numMissions, out ushort numExclusiveMissions)
+        private long ReadSizes(BinaryReader reader, byte[] version, byte alignmentChunkIndex, bool isChunkIndex, out uint mainScriptSize, out uint largestMissionScriptSize, out ushort numMissions, out ushort numExclusiveMissions)
         {
-            long ret = ReadNextHeaderChunkOffset(reader, version);
+            long ret = ReadAlignmentChunkIndex(reader, version, alignmentChunkIndex, isChunkIndex);
             mainScriptSize = reader.ReadUInt32();
             largestMissionScriptSize = reader.ReadUInt32();
             numMissions = reader.ReadUInt16();
@@ -192,17 +223,26 @@ namespace GTA3ScriptSharp
         /// Read mission offsets
         /// </summary>
         /// <param name="reader">Binary reader</param>
-        /// <param name="missionOffsets">Mission offsets</param>
-        /// <param name="numMissions">Number of missions</param>
-        private void ReadMissionOffsets(BinaryReader reader, out uint[] missionOffsets, ushort numMissions)
+        /// <param name="missionScriptOffsets">Mission script offsets</param>
+        /// <param name="numMissionScripts">Number of mission scripts</param>
+        /// <param name="reduceReadSize">Reduce read size</param>
+        private void ReadMissionOffsets(BinaryReader reader, out uint[] missionScriptOffsets, ushort numMissionScripts, bool reduceReadSize)
         {
             List<uint> mission_offsets = new List<uint>();
-            for (uint i = 0U; i != numMissions; i++)
+            for (uint i = 0U; i != numMissionScripts; i++)
             {
-                mission_offsets.Add(reader.ReadUInt32());
+                if (reduceReadSize)
+                {
+                    uint offset = reader.ReadUInt16();
+                    mission_offsets.Add(offset | (uint)(reader.ReadByte() << 16));
+                }
+                else
+                {
+                    mission_offsets.Add(reader.ReadUInt32());
+                }
             }
             mission_offsets.Sort();
-            missionOffsets = mission_offsets.ToArray();
+            missionScriptOffsets = mission_offsets.ToArray();
             mission_offsets.Clear();
         }
 
@@ -210,11 +250,11 @@ namespace GTA3ScriptSharp
         /// Read main script
         /// </summary>
         /// <param name="mainScriptSize">Main script size</param>
-        /// <param name="mainScriptData">Main script data</param>
-        private void ReadMainScript(uint mainScriptSize, out byte[] mainScriptData)
+        /// <param name="mainScript">Main script</param>
+        private void ReadMainScript(uint mainScriptSize, out byte[] mainScript)
         {
-            mainScriptData = new byte[mainScriptSize];
-            if (Stream.Read(mainScriptData, 0, mainScriptData.Length) != mainScriptData.Length)
+            mainScript = new byte[mainScriptSize];
+            if (Stream.Read(mainScript, 0, mainScript.Length) != mainScript.Length)
             {
                 throw new GTA3ScriptLoadException("This is not a SCM stream");
             }
@@ -223,20 +263,20 @@ namespace GTA3ScriptSharp
         /// <summary>
         /// Read mission scripts
         /// </summary>
-        /// <param name="missionOffsets">Mission offsets</param>
+        /// <param name="missionScriptOffsets">Mission script offsets</param>
         /// <param name="endStreamPosition">End of stream position</param>
-        /// <param name="missions">Mission</param>
-        private void ReadMissionScripts(uint[] missionOffsets, long endStreamPosition, out byte[][] missions)
+        /// <param name="missionScripts">Mission scripts</param>
+        private void ReadMissionScripts(uint[] missionScriptOffsets, long endStreamPosition, out byte[][] missionScripts)
         {
-            missions = new byte[missionOffsets.Length][];
-            for (int i = 0; i < missions.Length; i++)
+            missionScripts = new byte[missionScriptOffsets.Length][];
+            for (int i = 0; i < missionScripts.Length; i++)
             {
-                byte[] mission = new byte[((i < (missions.Length - 1)) ? missionOffsets[i + 1] : ((uint)(endStreamPosition))) - missionOffsets[i]];
+                byte[] mission = new byte[((i < (missionScripts.Length - 1)) ? missionScriptOffsets[i + 1] : ((uint)(endStreamPosition))) - missionScriptOffsets[i]];
                 if (Stream.Read(mission, 0, mission.Length) != mission.Length)
                 {
                     throw new GTA3ScriptLoadException("This is not a SCM stream");
                 }
-                missions[i] = mission;
+                missionScripts[i] = mission;
             }
         }
 
@@ -268,7 +308,7 @@ namespace GTA3ScriptSharp
                             GTA3ScriptInstruction instruction = runtime.InstructionSet[op_code];
                             Type[] argument_types = instruction.ArgumentTypes;
                             object[] arguments = new object[argument_types.Length];
-                            if (op_code == 0x2)
+                            if ((op_code == 0x2) || (op_code == 0x4D))
                             {
                                 if (argument_types.Length == 2)
                                 {
@@ -956,6 +996,22 @@ namespace GTA3ScriptSharp
                         }
                         ++command_index;
                     }
+                    if (resolve_labels.Count > 0)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Not all labels have been resolved:");
+                        foreach (KeyValuePair<long, List<uint>> resolve_label in resolve_labels)
+                        {
+                            sb.Append("\tPosition: ");
+                            sb.AppendLine(resolve_label.Key.ToString());
+                            foreach (uint i in resolve_label.Value)
+                            {
+                                sb.Append("\t\tCommand index: ");
+                                sb.AppendLine(i.ToString());
+                            }
+                        }
+                        throw new GTA3ScriptLoadException(sb.ToString());
+                    }
                 }
             }
             ret = script_commands.ToArray();
@@ -1001,19 +1057,19 @@ namespace GTA3ScriptSharp
                     ushort num_true_globals;
                     ushort most_globals;
                     GTA3ScriptStreamedScriptData[] streamed_script_data;
-                    GTA3ScriptCommand[] main_script_commands;
-                    GTA3ScriptCommand[][] mission_scripts_commands;
+                    GTA3ScriptCommand[] main_script_commands = null;
+                    GTA3ScriptCommand[][] mission_scripts_commands = null;
                     switch (Game)
                     {
                         case EGame.GTAIII:
                         case EGame.GTAViceCity:
-                            next_header_chunk = ReadGlobalVariableSpace(reader, version);
+                            next_header_chunk = ReadGameSpecifier(reader, version);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadAlignment(reader, version);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 0, false);
                             ReadUsedObjects(reader, out used_objects);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadSizes(reader, version, out main_script_size, out largest_mission_script_size, out num_mission_scripts, out num_exclusive_mission_scripts);
-                            ReadMissionOffsets(reader, out mission_script_offsets, num_mission_scripts);
+                            next_header_chunk = ReadSizes(reader, version, 0, false, out main_script_size, out largest_mission_script_size, out num_mission_scripts, out num_exclusive_mission_scripts);
+                            ReadMissionOffsets(reader, out mission_script_offsets, num_mission_scripts, false);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
                             ReadMainScript(main_script_size, out main_script);
                             ReadMissionScripts(mission_script_offsets, Stream.Length, out mission_scripts);
@@ -1023,19 +1079,18 @@ namespace GTA3ScriptSharp
                             {
                                 mission_scripts_commands[i] = ReadScriptCommands(runtime, mission_scripts[i]);
                             }
-                            // TODO
                             break;
                         case EGame.GTASanAndreas:
-                            next_header_chunk = ReadGlobalVariableSpace(reader, version);
+                            next_header_chunk = ReadGameSpecifier(reader, version);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadAlignment(reader, version);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 0, true);
                             ReadUsedObjects(reader, out used_objects);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadSizes(reader, version, out main_script_size, out largest_mission_script_size, out num_mission_scripts, out num_exclusive_mission_scripts);
+                            next_header_chunk = ReadSizes(reader, version, 1, true, out main_script_size, out largest_mission_script_size, out num_mission_scripts, out num_exclusive_mission_scripts);
                             largest_num_mission_script_local_vars = reader.ReadUInt32();
-                            ReadMissionOffsets(reader, out mission_script_offsets, num_mission_scripts);
+                            ReadMissionOffsets(reader, out mission_script_offsets, num_mission_scripts, false);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadNextHeaderChunkOffset(reader, version);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 2, true);
                             largest_streamed_script_size = reader.ReadUInt32();
                             num_streamed_scripts = reader.ReadUInt32();
                             byte[] data = new byte[24];
@@ -1056,11 +1111,13 @@ namespace GTA3ScriptSharp
                             streamed_script_data = streamed_script_data_list.ToArray();
                             streamed_script_data_list.Clear();
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadNextHeaderChunkOffset(reader, version);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 3, true);
                             aaa_file_offset = reader.ReadUInt32();
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 4, true);
                             size_global_var_space = reader.ReadUInt32();
                             streamed_script_checksum = reader.ReadUInt32();
+                            Stream.Seek(next_header_chunk, SeekOrigin.Begin);
                             ReadMainScript(main_script_size, out main_script);
                             ReadMissionScripts(mission_script_offsets, (streamed_script_data.Length > 0) ? streamed_script_data[0].FileOffset : Stream.Length, out mission_scripts);
                             streamed_scripts = new byte[num_streamed_scripts][];
@@ -1079,14 +1136,14 @@ namespace GTA3ScriptSharp
                             {
                                 mission_scripts_commands[i] = ReadScriptCommands(runtime, mission_scripts[i]);
                             }
-                            // TODO
                             break;
                         case EGame.GTALibertyCityStories:
                         case EGame.GTAViceCityStories:
                             main_script_size = reader.ReadUInt32();
                             largest_mission_script_size = reader.ReadUInt32();
-                            next_header_chunk = ReadNextHeaderChunkOffset(reader, version);
+                            next_header_chunk = ReadGameSpecifier(reader, version);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 0, false);
                             num_save_variables = reader.ReadUInt32();
                             save_variables = new ushort[num_save_variables];
                             for (int i = 0; i < save_variables.Length; i++)
@@ -1095,29 +1152,33 @@ namespace GTA3ScriptSharp
                             }
                             ReadUsedObjects(reader, out used_objects);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
-                            next_header_chunk = ReadNextHeaderChunkOffset(reader, version);
+                            next_header_chunk = ReadAlignmentChunkIndex(reader, version, 0, false);
                             num_true_globals = reader.ReadUInt16();
                             most_globals = reader.ReadUInt16();
                             largest_mission_script_size = reader.ReadUInt32();
                             num_mission_scripts = reader.ReadUInt16();
                             num_exclusive_mission_scripts = reader.ReadUInt16();
-                            // TODO
-
-                            // Test
-                            mission_script_offsets = new uint[0];
-
+                            ReadMissionOffsets(reader, out mission_script_offsets, num_mission_scripts, true);
                             Stream.Seek(next_header_chunk, SeekOrigin.Begin);
                             ReadMainScript(main_script_size, out main_script);
                             ReadMissionScripts(mission_script_offsets, Stream.Length, out mission_scripts);
+                            main_script_commands = ReadScriptCommands(runtime, main_script);
                             mission_scripts_commands = new GTA3ScriptCommand[mission_scripts.Length][];
                             for (int i = 0; i < mission_scripts.Length; i++)
                             {
                                 mission_scripts_commands[i] = ReadScriptCommands(runtime, mission_scripts[i]);
                             }
-                            // TODO
                             break;
                     }
-                    // TODO
+                    if (main_script_commands == null)
+                    {
+                        main_script_commands = new GTA3ScriptCommand[0];
+                    }
+                    if (mission_scripts_commands == null)
+                    {
+                        mission_scripts_commands = new GTA3ScriptCommand[0][];
+                    }
+                    runtime.LoadScriptFinished(main_script_commands, mission_scripts_commands);
                 }
             }
             catch (Exception e)
